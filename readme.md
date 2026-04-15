@@ -1,274 +1,168 @@
-# PDF → Markdown Converter (CLI Tool)
+# Ugly PDF
 
-A simple command-line tool to convert **PDF files into Markdown (.md)**.
-It supports both:
-
-* **Text-based PDFs** (fast extraction using `pdfminer`)
-* **Scanned PDFs** (OCR using `Tesseract`)
-
-The tool integrates with **Windows Explorer context menu**, allowing you to:
-
-> Right-click any folder → select PDFs → convert them to Markdown.
+A free, offline PDF toolkit for Windows. No upload. No account. Just PDF tools.
 
 ---
 
-# Features
+## Download
 
-* Convert **multiple PDFs at once**
-* Detect **text layer automatically**
-* **OCR fallback** for scanned documents
-* Interactive **CLI selection**
-* Works via **Windows right-click context menu**
-* Uses **Python virtual environment (venv)** for isolation
-* Supports **Poppler + Tesseract bundled locally**
+**[Download UglyPDF v1.0.0](https://placeholder-link.com/UglyPDF.zip)**
+
+- Windows 10 / 11
+- ~40 MB (unzip and run — no installer, no Python needed)
 
 ---
 
-# Example Workflow
+## Features
 
-Right-click a folder:
-
-```
-Convert PDF → Markdown
-```
-
-CLI opens:
-
-```
-Scanning folder:
-D:\Research\Papers
-
-1. paper1.pdf
-2. thesis.pdf
-3. report.pdf
-4. notes.pdf
-
-Select files (example: 1 3 4):
-> 1 3
-
-Starting conversion...
-
-[1/2] paper1.pdf
-  Text layer detected
-  ✔ Saved: paper1.md
-
-[2/2] thesis.pdf
-  No text detected → OCR running
-  ✔ Saved: thesis.md
-
-Done.
-```
-
-Markdown files will be created in the **same directory as the PDFs**.
+| Tool | Description |
+| --- | --- |
+| **PDF → Markdown** | Extract text from PDFs. Auto OCR fallback for scanned files. |
+| **Compress** | Reduce file size by stripping metadata and re-compressing streams. |
+| **Merge** | Combine multiple PDFs into one. Reorder before merging. |
+| **Split** | Split by every page or by custom ranges (e.g. `1-3, 5, 7-9`). |
+| **Page Editor** | Drag pages to reorder, rotate, delete. Mix pages from multiple PDFs. |
 
 ---
 
-# Project Structure
+## Usage (pre-built exe)
 
-```
-pdf-md-tool/
+1. Download and unzip `UglyPDF.zip`
+2. Open the `UglyPDF/` folder
+3. Double-click `UglyPDF.exe`
+4. Drag and drop PDF files onto the app
+
+Output files are always saved next to the source PDF.
+
+---
+
+## Project Structure
+
+```text
+pdf2md-cli/
 │
-├─ run.bat                # CLI launcher
-├─ register.bat           # install context menu
-├─ unregister.bat         # remove context menu
+├── app/
+│   ├── config.py          # paths for poppler / tesseract
+│   ├── main.py            # app window + tab container
+│   ├── toolbar.py         # top toolbar
+│   ├── widgets.py         # shared: DropZone, LogPanel
+│   ├── tab_convert.py     # PDF → Markdown
+│   ├── tab_compress.py    # Compress
+│   ├── tab_merge.py       # Merge
+│   ├── tab_split.py       # Split
+│   ├── tab_editor.py      # Page Editor
+│   └── tab_about.py       # About
 │
-├─ pdf_to_md.py           # main conversion script
-├─ requirements.txt
+├── poppler/               # Poppler binaries (bundled)
+├── tesseract/             # Tesseract OCR (bundled)
+├── assets/
+│   └── mascot.svg         # landing page mascot
 │
-├─ venv/                  # Python virtual environment
+├── pdf2md_gui.py          # entry point
+├── pdf2md.py              # CLI version (legacy)
+├── icon.ico               # app icon
+├── index.html             # landing page
 │
-├─ poppler/               # Poppler binaries
-│   └─ Library/bin/
-│
-└─ tesseract/             # Tesseract OCR
-    └─ tesseract.exe
+├── build.bat              # build standalone exe
+├── setup.bat              # set up venv on a new machine
+├── run.bat                # run from source (CLI mode)
+├── register.bat           # add Windows context menu
+├── unregister.bat         # remove Windows context menu
+└── requirements.txt
 ```
 
 ---
 
-# Installation
+## Development Setup
 
-## 1 Create Virtual Environment
+### 1. Clone the repo
 
+```bat
+git clone https://github.com/okik4zuya/uglypdf
+cd uglypdf
 ```
+
+### 2. Create virtual environment
+
+```bat
 python -m venv venv
 ```
 
-Activate it:
+Or use the provided script:
 
+```bat
+setup.bat
 ```
+
+### 3. Install dependencies
+
+```bat
 venv\Scripts\activate
-```
-
----
-
-## 2 Install Python Dependencies
-
-```
 pip install -r requirements.txt
 ```
 
-Dependencies:
+### 4. Add bundled binaries
 
-* `pdfminer.six`
-* `pdf2image`
-* `Pillow`
-* `pytesseract`
+Place the following in the project root:
 
----
+**Poppler** — download from [oschwartz10612/poppler-windows](https://github.com/oschwartz10612/poppler-windows/releases)
 
-## 3 Install Poppler
-
-Download Poppler for Windows and place it inside:
-
-```
-poppler/Library/bin/
+```text
+poppler/Library/bin/   ← extract here
 ```
 
-Used by:
+**Tesseract** — download from [UB-Mannheim/tesseract](https://github.com/UB-Mannheim/tesseract/wiki)
 
-```
-pdf2image
-```
-
----
-
-## 4 Install Tesseract OCR
-
-Download **Tesseract for Windows** and place:
-
-```
-tesseract.exe
-```
-
-inside:
-
-```
-tesseract/
-```
-
-Your structure should look like:
-
-```
+```text
 tesseract/tesseract.exe
+tesseract/tessdata/eng.traineddata
+```
+
+### 5. Run from source
+
+```bat
+venv\Scripts\python pdf2md_gui.py
 ```
 
 ---
 
-# Enable Right-Click Menu
+## Build Standalone Exe
 
-Run:
+Requires UPX for smaller output (optional):
 
-```
-register.bat
+1. Download [upx.exe](https://github.com/upx/upx/releases) and place it in `upx/`
+2. Run:
+
+```bat
+build.bat
 ```
 
-This adds a Windows Explorer option:
-
-```
-Convert PDF → Markdown
-```
+Output: `dist/UglyPDF/` — copy this folder to any Windows machine.
 
 ---
 
-# Remove Right-Click Menu
+## Dependencies
 
-Run:
-
-```
-unregister.bat
-```
-
----
-
-# Manual Usage
-
-You can also run the script directly:
-
-```
-venv\Scripts\python pdf_to_md.py file1.pdf file2.pdf
-```
-
-Example:
-
-```
-venv\Scripts\python pdf_to_md.py thesis.pdf report.pdf
-```
+| Package | Purpose |
+| --- | --- |
+| `pdfminer.six` | Text extraction from PDFs |
+| `pdf2image` | Render PDF pages to images (for OCR) |
+| `Pillow` | Image processing |
+| `pytesseract` | OCR via Tesseract |
+| `pypdf` | Merge, split, compress, page editing |
+| `tkinterdnd2` | Drag-and-drop support in the GUI |
+| `pyinstaller` | Build standalone exe |
 
 ---
 
-# Output
+## Known Limitations
 
-For every PDF:
-
-```
-paper.pdf
-```
-
-A Markdown file will be created:
-
-```
-paper.md
-```
-
-Structure:
-
-```
-# Extracted PDF Content
-
-(text content here)
-```
+- Table structure is not preserved in Markdown output
+- OCR quality depends on the scan resolution (300 DPI recommended)
+- Compression results vary — some PDFs may not shrink significantly
 
 ---
 
-# How It Works
+## License
 
-1. Try extracting text using:
-
-```
-pdfminer
-```
-
-2. If the PDF has **no text layer**:
-
-* convert pages to images (`pdf2image`)
-* run OCR (`pytesseract`)
-
-3. Combine the result and write:
-
-```
-Markdown (.md)
-```
-
----
-
-# Known Limitations
-
-* Layout is **linearized** (not perfect for complex multi-column PDFs)
-* Tables may not convert cleanly
-* OCR quality depends on scan quality
-
----
-
-# Possible Improvements
-
-Future upgrades may include:
-
-* Markdown **heading detection**
-* Table reconstruction
-* **Parallel PDF processing**
-* Range selection (`1-5`)
-* Skip already converted files
-* Build **single EXE distribution**
-
----
-
-# License
-
-Free for personal and research use.
-
----
-
-# Author
-
-Created as a lightweight utility for **PDF text extraction and OCR to Markdown conversion**.
+Free for personal use.

@@ -1,2 +1,31 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+
+# Build output
+build/
+dist/
+*.spec
+
+# Bundled binaries (too large for git — add manually)
 poppler/
 tesseract/
+upx/
+
+# Dist staging folder
+dist-pdf2md/
+
+# IDE / editor
+.claude/
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store

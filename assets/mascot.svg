@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 250" width="220" height="250">
+
+  <g stroke="#1565c0" stroke-linecap="round" stroke-linejoin="round" fill="none">
+
+    <!-- ── Hair strands ── -->
+    <line x1="68"  y1="64"  x2="52"  y2="28"  stroke-width="5.5"/>
+    <line x1="88"  y1="48"  x2="84"  y2="12"  stroke-width="5.5"/>
+    <line x1="110" y1="42"  x2="110" y2="6"   stroke-width="5.5"/>
+    <line x1="132" y1="46"  x2="140" y2="10"  stroke-width="5.5"/>
+    <line x1="152" y1="58"  x2="166" y2="26"  stroke-width="5.5"/>
+
+    <!-- ── Head — slightly wobbly outline only ── -->
+    <path stroke-width="5"
+      d="M 110 38
+         C 150 33, 194 68, 196 108
+         C 198 152, 170 200, 128 206
+         C 92  212, 46  196, 30  162
+         C 16  130, 24  84,  52  62
+         C 68  48,  86  41,  110 38 Z"/>
+
+    <!-- ── Left eyebrow — slants down toward nose ── -->
+    <path stroke-width="4.5"
+      d="M 58 88 C 70 78, 86 80, 96 88"/>
+
+    <!-- ── Right eyebrow — raised on outer end ── -->
+    <path stroke-width="4.5"
+      d="M 122 82 C 134 72, 152 73, 163 83"/>
+
+    <!-- ── Left eye — smaller, higher ── -->
+    <ellipse cx="77" cy="111" rx="14" ry="16" stroke-width="4"/>
+
+    <!-- ── Right eye — bigger, slightly lower ── -->
+    <ellipse cx="144" cy="117" rx="18" ry="15" stroke-width="4"/>
+
+    <!-- ── Mouth — wide crooked grin ── -->
+    <path stroke-width="4.5"
+      d="M 66 160 C 82 192, 108 200, 128 198 C 150 196, 166 180, 170 160"/>
+
+    <!-- ── Teeth dividers ── -->
+    <line x1="90"  y1="160" x2="88"  y2="182" stroke-width="2"/>
+    <line x1="109" y1="160" x2="109" y2="190" stroke-width="2"/>
+    <line x1="128" y1="160" x2="129" y2="189" stroke-width="2"/>
+    <line x1="148" y1="160" x2="150" y2="176" stroke-width="2"/>
+
+    <!-- ── Nose dots (small filled circles, same blue) ── -->
+    <circle cx="104" cy="140" r="4" fill="#1565c0" stroke="none"/>
+    <circle cx="116" cy="142" r="4" fill="#1565c0" stroke="none"/>
+
+    <!-- ── One ear sticking out ── -->
+    <path stroke-width="4"
+      d="M 32 128 C 16 120, 12 144, 30 150"/>
+
+  </g>
+
+</svg>

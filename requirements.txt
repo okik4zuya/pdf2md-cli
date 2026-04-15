@@ -2,3 +2,6 @@ pdfminer.six==20250506
 pdf2image==1.17.0
 pillow==11.3.0
 pytesseract==0.3.13
+tkinterdnd2==0.4.2
+pypdf==6.10.1
+pyinstaller==6.14.0
