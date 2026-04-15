@@ -6,7 +6,7 @@ A free, offline PDF toolkit for Windows. No upload. No account. Just PDF tools.
 
 ## Download
 
-**[Download UglyPDF v1.0.0](https://placeholder-link.com/UglyPDF.zip)**
+**[Download UglyPDF v1.0.0](https://github.com/okik4zuya/uglypdf/releases/download/v1.0.0/UglyPDF.zip)**
 
 - Windows 10 / 11
 - ~40 MB (unzip and run — no installer, no Python needed)
